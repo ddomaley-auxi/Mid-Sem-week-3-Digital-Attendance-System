@@ -1,0 +1,78 @@
+Add Attendace Status to Student
+
+class Student {
+public:
+    string indexNumber;
+    string name;
+    string status;  // Present, Absent, Late
+
+    Student(string index, string n) {
+        indexNumber = index;
+        name = n;
+        status = "Not Marked";
+    }
+
+    void display() {
+        cout << indexNumber << " - " << name 
+             << " - Status: " << status << endl;
+    }
+};
+
+Attendance Marking Logic
+
+void markAttendance(vector<Student>& students) {
+    string index;
+    int choice;
+
+    cout << "\nEnter Student Index Number: ";
+    cin >> index;
+
+    for (int i = 0; i < students.size(); i++) {
+        if (students[i].indexNumber == index) {
+
+            cout << "1. Present\n";
+            cout << "2. Absent\n";
+            cout << "3. Late\n";
+            cout << "Choose status: ";
+            cin >> choice;
+
+            if (choice == 1)
+                students[i].status = "Present";
+            else if (choice == 2)
+                students[i].status = "Absent";
+            else if (choice == 3)
+                students[i].status = "Late";
+            else
+                cout << "Invalid choice!\n";
+
+            cout << "Attendance Updated Successfully!\n";
+            return;
+        }
+    }
+
+    cout << "Student not found!\n";
+}
+
+Generate Attendace Report
+
+void generateReport(vector<Student>& students) {
+    int present = 0, absent = 0, late = 0;
+
+    cout << "\n===== Attendance Report =====\n";
+
+    for (int i = 0; i < students.size(); i++) {
+        students[i].display();
+
+        if (students[i].status == "Present")
+            present++;
+        else if (students[i].status == "Absent")
+            absent++;
+        else if (students[i].status == "Late")
+            late++;
+    }
+
+    cout << "\nSummary:\n";
+    cout << "Present: " << present << endl;
+    cout << "Absent: " << absent << endl;
+    cout << "Late: " << late << endl;
+}
